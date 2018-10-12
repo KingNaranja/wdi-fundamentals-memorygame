@@ -1,7 +1,5 @@
 
-//console.log("User flipped" + cardOne);
-
-cards = [
+var cards = [
     {
     rank: "queen",
     suit: "hearts",
@@ -26,41 +24,69 @@ cards = [
 
 cardsInPlay = [];
 
-var checkForMatch = function() {
-    if (cardsInPlay[0] === cardsInPlay[1]) {
-        console.log("You found a match!");
-        } else {
-        console.log("Sorry, try again.");
-        }
-    };    
+var checkForMatch = function(cardOne,cardTwo) {
+    
+    cardOne = parseInt(cardOne); // converts data-id value from str to int
+    cardTwo = parseInt(cardTwo);
+    
+    //if the two user-selected cards match, an alert will pop up
+    if (cardOne + cardTwo == 1 || cardOne + cardTwo == 5) {
+        console.log('match');
+        alert("You found a match!");
+    }else {
+        console.log('no match');
+        alert("Sorry, try again!");
+    }
+};    
            
 
+//when the user flips a card
+var flipCard = function() { 
+    var cardId = this.getAttribute('data-id');
 
-var flipCard = function(cardId) {
-    //this block will run when the user flips a card 
 
-    // Log the  flipped card name, image, and suit to the console
+    //log the  flipped card name, image, and suit to the console
     console.log("User flipped " + cards[cardId].rank);
     console.log(cards[cardId].cardImage);
     console.log(cards[cardId].suit);
     
     
-    cardsInPlay.push(cards[cardId].rank);
-    //adds the selected card to the the 'cards' array;
+    cardsInPlay.push(cardId); //adds the selected card to the the 'cards' array;
+    console.log(cardsInPlay); //logs that card into the console
     
+    console.log("the value of this is", this)
+    //the value of this is  <img src=​"images/​back.png" data-id=​"1">​
     
+    this.setAttribute('src', cards[cardId].cardImage); // adds card front img to clicked card
+    
+
     if (cardsInPlay.length === 2) {
-        //if the two user-selected cards match, an alert will pop up
-        if (cardsInPlay[0] === cardsInPlay[1]) {
-            alert("You found a match!")
-        } else {
-            alert("Sorry, try again")
-        };
-        checkForMatch();
+        //after user selected 2 cards
+        // test win condition
+        checkForMatch(cardsInPlay[0], cardsInPlay[1]);
     };
     
+
+console.log(parseInt(cardsInPlay));
+    
 }
+// draw the game board;   
+var createBoard = function() {
+    for (var i = 0; i < cards.length; i++) {
+        var cardElement = document.createElement('img');
+        cardElement.setAttribute('src', "images/back.png");
+        cardElement.setAttribute('data-id', i);
+        console.log("cardElement is ", cardElement);     
+        cardElement.addEventListener('click', flipCard);
+        document.getElementById('game-board').appendChild(cardElement)
+    };
+    
+};
 
-flipCard(0);
-flipCard(2);
 
+
+
+
+
+
+createBoard();//Draws gameboard; sets the cards 
