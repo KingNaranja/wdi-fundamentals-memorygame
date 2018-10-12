@@ -33,13 +33,14 @@ var checkForMatch = function(cardOne,cardTwo) {
     if (cardOne + cardTwo == 1 || cardOne + cardTwo == 5) {
         console.log('match');
         alert("You found a match!");
-        resetBoard();
+        
     }else {
         console.log('no match');
         alert("Sorry, try again!");
-        resetBoard()
+        
     }
-    //createBoard()   
+      resetBoard();
+      cardsInPlay = [] //resets the user game data 
 };    
            
 
@@ -59,6 +60,7 @@ var flipCard = function() {
     
     console.log("the value of this is", this)
     //the value of this is  <img src=​"images/​back.png" data-id=​"1">​
+    //thank you Danny, you are a lifesaver 
     
     this.setAttribute('src', cards[cardId].cardImage); // adds card front img to clicked card
     
@@ -70,7 +72,7 @@ var flipCard = function() {
     };
     
 
-console.log(parseInt(cardsInPlay));
+
     
 }
 // draw the game board;   
@@ -99,10 +101,11 @@ var createBoard = function() {
      }
  }
 
+var playGame = function() {
+    var startButton = document.getElementById('playGame');
+    startButton.addEventListener('click',createBoard);
+    //Draws gameboard and sets the cards when user presses button
 
+}
 
-
-
-
-
-createBoard();//Draws gameboard; sets the cards 
+playGame(); // Starts game loop
