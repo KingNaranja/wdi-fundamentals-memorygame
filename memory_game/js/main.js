@@ -33,10 +33,13 @@ var checkForMatch = function(cardOne,cardTwo) {
     if (cardOne + cardTwo == 1 || cardOne + cardTwo == 5) {
         console.log('match');
         alert("You found a match!");
+        resetBoard();
     }else {
         console.log('no match');
         alert("Sorry, try again!");
+        resetBoard()
     }
+    //createBoard()   
 };    
            
 
@@ -82,6 +85,19 @@ var createBoard = function() {
     };
     
 };
+
+
+
+ var resetBoard = function() {
+     var cardDeck = document.getElementsByTagName('img');
+     console.log(cardDeck) // cardDeck contains recently played game cards
+     
+     //iterate through cardDeck and revert the 'img' attribute 
+     for (var card of cardDeck) {
+         //console.log(card);
+         card.setAttribute('src', "images/back.png"); // flips card over
+     }
+ }
 
 
 
