@@ -99,12 +99,13 @@ var createBoard = function() {
          //console.log(card);
          card.setAttribute('src', "images/back.png"); // flips card over
      }
+     cards.reverse(); //to make this a memory game
  }
 
 var playGame = function() {
     var startButton = document.getElementById('playGame');
-    startButton.addEventListener('click',createBoard);
-    //Draws gameboard and sets the cards when user presses button
+        startButton.addEventListener('click',createBoard);
+        //Draws gameboard and sets the cards when user presses button
 
 }
 
